@@ -1,16 +1,29 @@
-import { Node, mergeAttributes, nodePasteRule } from "@tiptap/core";
-import { NodeViewWrapper, ReactNodeViewRenderer, type ReactNodeViewRendererOptions } from "@tiptap/react";
-import { Tweet } from "react-tweet";
-export const TWITTER_REGEX_GLOBAL = /(https?:\/\/)?(www\.)?x\.com\/([a-zA-Z0-9_]{1,15})(\/status\/(\d+))?(\/\S*)?/g;
-export const TWITTER_REGEX = /^https?:\/\/(www\.)?x\.com\/([a-zA-Z0-9_]{1,15})(\/status\/(\d+))?(\/\S*)?$/;
+import { Node, mergeAttributes, nodePasteRule } from '@tiptap/core';
+import {
+  NodeViewWrapper,
+  ReactNodeViewRenderer,
+  type ReactNodeViewRendererOptions,
+} from '@tiptap/react';
+import { Tweet } from 'react-tweet';
+export const TWITTER_REGEX_GLOBAL =
+  /(https?:\/\/)?(www\.)?x\.com\/([a-zA-Z0-9_]{1,15})(\/status\/(\d+))?(\/\S*)?/g;
+export const TWITTER_REGEX =
+  /^https?:\/\/(www\.)?x\.com\/([a-zA-Z0-9_]{1,15})(\/status\/(\d+))?(\/\S*)?$/;
 
 export const isValidTwitterUrl = (url: string) => {
   return url.match(TWITTER_REGEX);
 };
 
-const TweetComponent = ({ node }: { node: Partial<ReactNodeViewRendererOptions> }) => {
+const TweetComponent = ({
+  node,
+}: {
+  node: Partial<ReactNodeViewRendererOptions>;
+}) => {
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const url = node?.attrs?.src;
-  const tweetId = url?.split("/").pop();
+  const tweetId = url?.split('/').pop();
 
   if (!tweetId) {
     return null;
@@ -18,7 +31,7 @@ const TweetComponent = ({ node }: { node: Partial<ReactNodeViewRendererOptions> 
 
   return (
     <NodeViewWrapper>
-      <div data-twitter="">
+      <div data-twitter=''>
         <Tweet id={tweetId} />
       </div>
     </NodeViewWrapper>
@@ -57,7 +70,7 @@ export interface TwitterOptions {
  */
 type SetTweetOptions = { src: string };
 
-declare module "@tiptap/core" {
+declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     twitter: {
       /**
@@ -74,19 +87,21 @@ declare module "@tiptap/core" {
  * This extension adds support for tweets.
  */
 export const Twitter = Node.create<TwitterOptions>({
-  name: "twitter",
+  name: 'twitter',
 
   addOptions() {
     return {
       addPasteHandler: true,
       HTMLAttributes: {},
       inline: false,
-      origin: "",
+      origin: '',
     };
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(TweetComponent, { attrs: this.options.HTMLAttributes });
+    return ReactNodeViewRenderer(TweetComponent, {
+      attrs: this.options.HTMLAttributes,
+    });
   },
 
   inline() {
@@ -94,7 +109,7 @@ export const Twitter = Node.create<TwitterOptions>({
   },
 
   group() {
-    return this.options.inline ? "inline" : "block";
+    return this.options.inline ? 'inline' : 'block';
   },
 
   draggable: true,
@@ -110,7 +125,7 @@ export const Twitter = Node.create<TwitterOptions>({
   parseHTML() {
     return [
       {
-        tag: "div[data-twitter]",
+        tag: 'div[data-twitter]',
       },
     ];
   },
@@ -141,7 +156,7 @@ export const Twitter = Node.create<TwitterOptions>({
       nodePasteRule({
         find: TWITTER_REGEX_GLOBAL,
         type: this.type,
-        getAttributes: (match) => {
+        getAttributes: match => {
           return { src: match.input };
         },
       }),
@@ -149,6 +164,6 @@ export const Twitter = Node.create<TwitterOptions>({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ["div", mergeAttributes({ "data-twitter": "" }, HTMLAttributes)];
+    return ['div', mergeAttributes({ 'data-twitter': '' }, HTMLAttributes)];
   },
 });
