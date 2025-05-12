@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo, useState } from 'react';
@@ -9,19 +9,18 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-
 } from '@/components';
 
 import type { ButtonViewReturnComponentProps } from '@/types';
 import { IconComponent } from '@/components/icons';
 
 interface IPropsLineHeightDropdown {
-  editor: any
-  icon?: any
-  tooltip?: string
-  disabled?: boolean
-  action?: ButtonViewReturnComponentProps['action']
-  isActive?: ButtonViewReturnComponentProps['isActive']
+  editor: any;
+  icon?: any;
+  tooltip?: string;
+  disabled?: boolean;
+  action?: ButtonViewReturnComponentProps['action'];
+  isActive?: ButtonViewReturnComponentProps['isActive'];
 }
 
 function percentageToDecimal(percentageString: any) {
@@ -31,7 +30,6 @@ function percentageToDecimal(percentageString: any) {
 }
 
 function LineHeightDropdown(props: IPropsLineHeightDropdown) {
-
   const [value, setValue] = useState('default');
 
   function toggleLightheight(key: string) {
@@ -45,7 +43,7 @@ function LineHeightDropdown(props: IPropsLineHeightDropdown) {
 
   const LineHeights = useMemo(() => {
     const lineHeightOptions = props.editor.extensionManager.extensions.find(
-      (e: any) => e.name === 'lineHeight',
+      (e: any) => e.name === 'lineHeight'
     )!.options;
     const a = lineHeightOptions.lineHeights;
     const b = a.map((item: any) => ({
@@ -62,22 +60,21 @@ function LineHeightDropdown(props: IPropsLineHeightDropdown) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild
-        disabled={props?.disabled}
-      >
+      <DropdownMenuTrigger asChild disabled={props?.disabled}>
         <ActionButton
-          customClass="!richtext-w-12 richtext-h-12"
+          customClass='!w-12 h-12'
           disabled={props?.disabled}
-          icon="LineHeight"
+          icon='LineHeight'
           tooltip={props?.tooltip}
         >
-          <IconComponent className="richtext-ml-1 richtext-size-3 richtext-text-zinc-500"
-            name="MenuDown"
+          <IconComponent
+            className='ml-1 size-3 text-zinc-500'
+            name='MenuDown'
           />
         </ActionButton>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="richtext-min-w-24">
+      <DropdownMenuContent className='min-w-24'>
         {LineHeights?.map((item: any, index: any) => {
           return (
             <DropdownMenuCheckboxItem

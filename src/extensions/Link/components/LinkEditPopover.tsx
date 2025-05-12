@@ -1,22 +1,27 @@
-"use client"
+'use client';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 
-import { ActionButton, Popover, PopoverContent, PopoverTrigger } from '@/components';
+import {
+  ActionButton,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components';
 import LinkEditBlock from '@/extensions/Link/components/LinkEditBlock';
 import type { ButtonViewReturnComponentProps } from '@/types';
 import { IconComponent } from '@/components/icons';
 
 interface IPropsLinkEditPopover {
-  editor: any
-  icon?: any
-  title?: string
-  tooltip?: string
-  disabled?: boolean
-  shortcutKeys?: string[]
-  isActive?: ButtonViewReturnComponentProps['isActive']
-  action?: ButtonViewReturnComponentProps['action']
+  editor: any;
+  icon?: any;
+  title?: string;
+  tooltip?: string;
+  disabled?: boolean;
+  shortcutKeys?: string[];
+  isActive?: ButtonViewReturnComponentProps['isActive'];
+  action?: ButtonViewReturnComponentProps['action'];
 }
 
 function LinkEditPopover(props: IPropsLinkEditPopover) {
@@ -40,7 +45,12 @@ function LinkEditPopover(props: IPropsLinkEditPopover) {
           <IconComponent name={props?.icon} />
         </ActionButton>
       </PopoverTrigger>
-      <PopoverContent hideWhenDetached className="richtext-w-full" align="start" side="bottom">
+      <PopoverContent
+        hideWhenDetached
+        className='w-full'
+        align='start'
+        side='bottom'
+      >
         <LinkEditBlock editor={props.editor} onSetLink={onSetLink} />
       </PopoverContent>
     </Popover>

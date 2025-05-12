@@ -13,94 +13,91 @@ import { icons } from './icons';
 
 export interface ActionButtonProps {
   /* Icon name to display */
-  icon?: string
+  icon?: string;
   /* Button title */
-  title?: string
+  title?: string;
   /* Tooltip text */
-  tooltip?: string
+  tooltip?: string;
   /* Whether the button is disabled */
-  disabled?: boolean
+  disabled?: boolean;
   /* Keyboard shortcut keys */
-  shortcutKeys?: string[]
+  shortcutKeys?: string[];
   /* Custom CSS class */
-  customClass?: string
+  customClass?: string;
   /* Loading state */
-  loading?: boolean
+  loading?: boolean;
   /* Tooltip options */
-  tooltipOptions?: TooltipContentProps
+  tooltipOptions?: TooltipContentProps;
   /* Button color */
-  color?: string
+  color?: string;
   /* Click action handler */
-  action?: ButtonViewReturnComponentProps['action']
+  action?: ButtonViewReturnComponentProps['action'];
   /* Active state checker */
-  isActive?: ButtonViewReturnComponentProps['isActive']
+  isActive?: ButtonViewReturnComponentProps['isActive'];
   /* Child components */
-  children?: React.ReactNode
+  children?: React.ReactNode;
   /* Whether to render as child */
-  asChild?: boolean
+  asChild?: boolean;
   /* Whether it's an upload button */
-  upload?: boolean
+  upload?: boolean;
 }
 
-const ActionButton = React.forwardRef<HTMLButtonElement, Partial<ActionButtonProps>>(
-  (props, ref) => {
-    const {
-      icon = undefined,
-      // title = undefined,
-      tooltip = undefined,
-      disabled = false,
-      customClass = '',
-      // color = undefined,
-      loading = undefined,
-      shortcutKeys = undefined,
-      tooltipOptions = {},
-      action = undefined,
-      isActive = undefined,
-      children,
-      asChild = false,
-      upload = false,
-      ...rest
-    } = props;
+const ActionButton = React.forwardRef<
+  HTMLButtonElement,
+  Partial<ActionButtonProps>
+>((props, ref) => {
+  const {
+    icon = undefined,
+    // title = undefined,
+    tooltip = undefined,
+    disabled = false,
+    customClass = '',
+    // color = undefined,
+    loading = undefined,
+    shortcutKeys = undefined,
+    tooltipOptions = {},
+    action = undefined,
+    isActive = undefined,
+    children,
+    asChild = false,
+    upload = false,
+    ...rest
+  } = props;
 
-    const Icon = icons[icon as string];
-    const Comp = asChild ? Slot : Toggle;
+  const Icon = icons[icon as string];
+  const Comp = asChild ? Slot : Toggle;
 
-    return (
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Comp
-            data-state={isActive?.() ? 'on' : 'off'}
-            onClick={action}
-            ref={ref}
-            size="sm"
-            className={cn('richtext-w-[32px] richtext-h-[32px]', customClass)}
-            // pressed={isActive?.() || false}
-            disabled={disabled}
-            {...(rest as Omit<typeof rest, 'loading'>)}
-          >
-            {Icon && <Icon className="richtext-size-4" />}
-            {children}
-          </Comp>
-        </TooltipTrigger>
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Comp
+          data-state={isActive?.() ? 'on' : 'off'}
+          onClick={action}
+          ref={ref}
+          size='sm'
+          className={cn('w-[32px] h-[32px]', customClass)}
+          // pressed={isActive?.() || false}
+          disabled={disabled}
+          {...(rest as Omit<typeof rest, 'loading'>)}
+        >
+          {Icon && <Icon className='size-4' />}
+          {children}
+        </Comp>
+      </TooltipTrigger>
 
-        {tooltip && (
-          <TooltipContent {...tooltipOptions}>
-            <div className="richtext-flex richtext-max-w-24 richtext-flex-col richtext-items-center richtext-text-center">
-              <div>
-                {tooltip}
-              </div>
+      {tooltip && (
+        <TooltipContent {...tooltipOptions}>
+          <div className='flex max-w-24 flex-col items-center text-center'>
+            <div>{tooltip}</div>
 
-              {!!shortcutKeys?.length && <span>
-                {getShortcutKeys(shortcutKeys)}
-              </span>}
-            </div>
-          </TooltipContent>
-        )}
-      </Tooltip>
-    );
-  },
-);
+            {!!shortcutKeys?.length && (
+              <span>{getShortcutKeys(shortcutKeys)}</span>
+            )}
+          </div>
+        </TooltipContent>
+      )}
+    </Tooltip>
+  );
+});
 
-export {
-  ActionButton,
-};
+export { ActionButton };

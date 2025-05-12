@@ -1,14 +1,10 @@
-"use client"
+'use client';
 
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useState } from 'react';
 
-import ReactCrop, {
-  type Crop,
-  type PixelCrop,
-} from 'react-image-crop';
-
+import ReactCrop, { type Crop, type PixelCrop } from 'react-image-crop';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -24,8 +20,6 @@ import { dataURLtoFile, readImageAsBase64 } from '@/utils/file';
 import { IconComponent } from '@/components/icons';
 
 export function ImageCropper({ editor, imageInline, onClose }: any) {
-
-
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const imgRef = React.useRef<HTMLImageElement | null>(null);
@@ -67,7 +61,7 @@ export function ImageCropper({ editor, imageInline, onClose }: any) {
         0,
         0,
         crop.width * scaleX,
-        crop.height * scaleY,
+        crop.height * scaleY
       );
     }
 
@@ -76,10 +70,13 @@ export function ImageCropper({ editor, imageInline, onClose }: any) {
 
   async function onCrop() {
     try {
-      const fileCrop = dataURLtoFile(croppedImageUrl, urlUpload?.file?.name || 'image.png');
+      const fileCrop = dataURLtoFile(
+        croppedImageUrl,
+        urlUpload?.file?.name || 'image.png'
+      );
 
       const uploadOptions = editor.extensionManager.extensions.find(
-        (extension: any) => extension.name === ExtensionImage.name,
+        (extension: any) => extension.name === ExtensionImage.name
       )?.options;
 
       let src = '';
@@ -126,10 +123,7 @@ export function ImageCropper({ editor, imageInline, onClose }: any) {
 
   return (
     <>
-      <Button className="richtext-mt-1 richtext-w-full"
-        onClick={handleClick}
-        size="sm"
-      >
+      <Button className='mt-1 w-full' onClick={handleClick} size='sm'>
         Upload Crop
       </Button>
 
@@ -137,23 +131,17 @@ export function ImageCropper({ editor, imageInline, onClose }: any) {
         <DialogTrigger />
 
         <DialogContent>
-          <DialogTitle>
-            Upload Crop
-          </DialogTitle>
+          <DialogTitle>Upload Crop</DialogTitle>
 
           <div>
             {urlUpload.src && (
               <ReactCrop
-                className="richtext-w-full"
+                className='w-full'
                 crop={crop}
                 onChange={c => setCrop(c)}
                 onComplete={c => onCropComplete(c)}
               >
-                <img
-                  alt="Crop me"
-                  ref={imgRef}
-                  src={urlUpload.src}
-                />
+                <img alt='Crop me' ref={imgRef} src={urlUpload.src} />
               </ReactCrop>
             )}
           </div>
@@ -169,31 +157,23 @@ export function ImageCropper({ editor, imageInline, onClose }: any) {
               }}
             >
               Cancel
-
-              <IconComponent className="richtext-ml-[4px]"
-                name="Trash2"
-              />
+              <IconComponent className='ml-[4px]' name='Trash2' />
             </Button>
 
-            <Button className="richtext-w-fit"
-              onClick={onCrop}
-            >
+            <Button className='w-fit' onClick={onCrop}>
               Crop
-
-              <IconComponent className="richtext-ml-[4px]"
-                name="Crop"
-              />
+              <IconComponent className='ml-[4px]' name='Crop' />
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
       <input
-        accept="image/*"
+        accept='image/*'
         multiple
         onChange={handleFile}
         ref={fileInput}
-        type="file"
+        type='file'
         style={{
           display: 'none',
         }}

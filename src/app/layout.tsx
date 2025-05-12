@@ -1,7 +1,12 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-
+import 'prism-code-editor-lightweight/layout.css';
+import 'prism-code-editor-lightweight/themes/github-dark.css';
+import '@/styles/ProseMirror.scss';
+import '@/styles/editor.scss';
+import '@/styles/mention.scss';
+import '@/styles/columns.scss';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

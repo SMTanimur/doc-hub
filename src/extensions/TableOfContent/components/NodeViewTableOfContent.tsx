@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+'use client';
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -7,7 +7,6 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { NodeViewWrapper } from '@tiptap/react';
 import cls from 'clsx';
-
 
 import { useEditableEditor } from '@/stores';
 
@@ -35,7 +34,6 @@ function arrToTree(tocs: any) {
 export function NodeViewTableOfContent({ editor }: any) {
   const isEditable = useEditableEditor();
   const [items, setItems] = useState([]);
-
 
   const handleUpdate = useCallback(() => {
     const headings = [] as any;
@@ -65,7 +63,8 @@ export function NodeViewTableOfContent({ editor }: any) {
     editor.view.dispatch(transaction);
 
     setItems(headings);
-    editor.eventEmitter && editor.eventEmitter.emit('TableOfContents', arrToTree(headings));
+    editor.eventEmitter &&
+      editor.eventEmitter.emit('TableOfContents', arrToTree(headings));
   }, [editor]);
 
   useEffect(() => {
@@ -91,29 +90,30 @@ export function NodeViewTableOfContent({ editor }: any) {
   }, []);
 
   return (
-    <NodeViewWrapper className={cls('tableOfContent', styles.toc, isEditable && styles.visible)}>
-      {isEditable
-        ? (
-          <div style={{ position: 'relative' }}>
-            <p className="text-[20px] richtext-mb-[8px] richtext-font-semibold">
-              Table of Content
-            </p>
+    <NodeViewWrapper
+      className={cls(
+        'tableOfContent',
+        styles.toc,
+        isEditable && styles.visible
+      )}
+    >
+      {isEditable ? (
+        <div style={{ position: 'relative' }}>
+          <p className='text-[20px] mb-[8px] font-semibold'>Table of Content</p>
 
-            <ul className={styles.list}>
-              {items.map((item: any, index) => (
-                <li className={styles.item}
-                  key={`table-of-content-${index}`}
-                  style={{ paddingLeft: `${item.level - 1}rem` }}
-                >
-                  <a href={`#${item.id}`}>
-                    {item.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-        : null}
+          <ul className={styles.list}>
+            {items.map((item: any, index) => (
+              <li
+                className={styles.item}
+                key={`table-of-content-${index}`}
+                style={{ paddingLeft: `${item.level - 1}rem` }}
+              >
+                <a href={`#${item.id}`}>{item.text}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </NodeViewWrapper>
   );
 }

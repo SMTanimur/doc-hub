@@ -84,11 +84,11 @@ export const Image = /* @__PURE__ */ TiptapImage.extend<IImageOptions>({
       button: ({
         editor,
         extension,
-        t,
+     
       }: {
         editor: any
         extension: any
-        t: (key: string) => string
+     
       }) => ({
         component: ActionImageButton,
         componentProps: {
@@ -99,7 +99,7 @@ export const Image = /* @__PURE__ */ TiptapImage.extend<IImageOptions>({
           /* If setImage is not available(when Image Component is not imported), the button is disabled */
           disabled: !editor.can().setImage?.({}),
           icon: 'ImageUp',
-          tooltip: t('editor.image.tooltip'),
+          tooltip: 'Insert Image',
           editor,
         },
       }),

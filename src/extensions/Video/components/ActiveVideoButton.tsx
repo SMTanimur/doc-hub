@@ -1,8 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { ActionButton, Button, Input, Tabs, TabsContent, TabsList, TabsTrigger } from '@/components';
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+  ActionButton,
+  Button,
+  Input,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Video } from '@/extensions/Video/Video';
 
 import { listenEvent } from '@/utils/customEvents/customEvents';
@@ -13,8 +26,6 @@ function checkIsVideo(url: string) {
 }
 
 function ActionVideoButton(props: any) {
-
-
   const [link, setLink] = useState<string>('');
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -27,7 +38,10 @@ function ActionVideoButton(props: any) {
   };
 
   useEffect(() => {
-    const rm1 = listenEvent(EVENTS.UPLOAD_VIDEO(props.editor.id), handleUploadVideo);
+    const rm1 = listenEvent(
+      EVENTS.UPLOAD_VIDEO(props.editor.id),
+      handleUploadVideo
+    );
 
     return () => {
       rm1();
@@ -36,7 +50,7 @@ function ActionVideoButton(props: any) {
 
   const uploadOptions = useMemo(() => {
     const uploadOptions = props.editor.extensionManager.extensions.find(
-      (extension: any) => extension.name === Video.name,
+      (extension: any) => extension.name === Video.name
     )?.options;
 
     return uploadOptions;
@@ -91,9 +105,7 @@ function ActionVideoButton(props: any) {
   }
 
   return (
-    <Dialog onOpenChange={setOpen}
-      open={open}
-    >
+    <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>
         <ActionButton
           action={() => setOpen(true)}
@@ -103,62 +115,58 @@ function ActionVideoButton(props: any) {
       </DialogTrigger>
 
       <DialogContent>
-        <DialogTitle>
-          Video
-        </DialogTitle>
+        <DialogTitle>Video</DialogTitle>
 
         <Tabs
-          activationMode="manual"
+          activationMode='manual'
           defaultValue={
-            (uploadOptions?.resourceVideo === 'both' || uploadOptions?.resourceVideo === 'upload') ? 'upload' : 'link'
+            uploadOptions?.resourceVideo === 'both' ||
+            uploadOptions?.resourceVideo === 'upload'
+              ? 'upload'
+              : 'link'
           }
         >
-          <TabsList className="richtext-grid richtext-w-full richtext-grid-cols-2">
-            {(uploadOptions?.resourceVideo === 'both' || uploadOptions?.resourceVideo === 'upload') && (
-              <TabsTrigger value="upload">
-                Upload
-              </TabsTrigger>
+          <TabsList className='grid w-full grid-cols-2'>
+            {(uploadOptions?.resourceVideo === 'both' ||
+              uploadOptions?.resourceVideo === 'upload') && (
+              <TabsTrigger value='upload'>Upload</TabsTrigger>
             )}
 
-            {(uploadOptions?.resourceVideo === 'both' || uploadOptions?.resourceVideo === 'link') && (
-              <TabsTrigger value="link">
-                Link
-              </TabsTrigger>
+            {(uploadOptions?.resourceVideo === 'both' ||
+              uploadOptions?.resourceVideo === 'link') && (
+              <TabsTrigger value='link'>Link</TabsTrigger>
             )}
           </TabsList>
 
-          <TabsContent value="upload">
-            <div className="richtext-flex richtext-items-center richtext-gap-[10px]">
-              <Button className="richtext-mt-1 richtext-w-full"
-                onClick={handleClick}
-                size="sm"
-              >
+          <TabsContent value='upload'>
+            <div className='flex items-center gap-[10px]'>
+              <Button className='mt-1 w-full' onClick={handleClick} size='sm'>
                 Upload
               </Button>
             </div>
 
             <input
-              accept="video/*"
+              accept='video/*'
               multiple
               onChange={handleFile}
               ref={fileInput}
-              type="file"
+              type='file'
               style={{
                 display: 'none',
               }}
             />
           </TabsContent>
 
-          <TabsContent value="link">
+          <TabsContent value='link'>
             <form onSubmit={handleLink}>
-              <div className="richtext-flex richtext-items-center richtext-gap-2">
+              <div className='flex items-center gap-2'>
                 <Input
                   autoFocus
-                  placeholder="Enter video URL"
+                  placeholder='Enter video URL'
                   required
-                  type="url"
+                  type='url'
                   value={link}
-                  onChange={(e) => {
+                  onChange={e => {
                     const url = e.target.value;
 
                     const isVideoUrl = checkIsVideo(url);
@@ -173,15 +181,11 @@ function ActionVideoButton(props: any) {
                   }}
                 />
 
-                <Button type="submit">
-                  Apply
-                </Button>
+                <Button type='submit'>Apply</Button>
               </div>
             </form>
 
-            {error && <div className="richtext-my-[5px] richtext-text-red-500">
-              {error}
-            </div>}
+            {error && <div className='my-[5px] text-red-500'>{error}</div>}
           </TabsContent>
         </Tabs>
       </DialogContent>

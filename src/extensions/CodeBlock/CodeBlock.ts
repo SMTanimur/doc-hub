@@ -37,7 +37,7 @@ export const CodeBlock = /* @__PURE__ */ Node.create({
     return {
       ...this.parent?.(),
       languages: [],
-      button: ({ editor, t }: any) => {
+      button: ({ editor}: any) => {
         return {
           component: CodeBlockActiveButton,
           componentProps: {
@@ -45,7 +45,7 @@ export const CodeBlock = /* @__PURE__ */ Node.create({
             isActive: () => editor.isActive('codeBlock') || false,
             disabled: false,
             icon: 'Code2',
-            tooltip: t('editor.codeblock.tooltip'),
+            tooltip: 'Insert Code Block',
           },
         };
       },

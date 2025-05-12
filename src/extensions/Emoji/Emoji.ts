@@ -45,7 +45,7 @@ export const Emoji = /* @__PURE__ */ Node.create({
             .run();
         },
       },
-      button: ({ editor, t }: any) => {
+      button: ({ editor }: any) => {
         return {
           component: EmojiPicker,
           componentProps: {
@@ -56,7 +56,7 @@ export const Emoji = /* @__PURE__ */ Node.create({
             isActive: () => false,
             disabled: false,
             icon: 'EmojiIcon',
-            tooltip: t('editor.emoji.tooltip'),
+            tooltip: 'Insert Emoji',
           },
         };
       },

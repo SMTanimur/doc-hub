@@ -1,33 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+'use client';
 
 import React, { useMemo } from 'react';
 
 import { ActionButton } from '@/components';
-import { Popover, PopoverContent, PopoverTrigger, Toggle, Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Toggle,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui';
 import type { ButtonViewReturnComponentProps } from '@/types';
 import { getShortcutKey } from '@/utils/plateform';
 import { IconComponent } from '@/components/icons';
 
 export interface Item {
-  title: string
-  icon?: any
-  isActive: NonNullable<ButtonViewReturnComponentProps['isActive']>
-  action?: ButtonViewReturnComponentProps['action']
-  style?: React.CSSProperties
-  shortcutKeys?: string[]
-  disabled?: boolean
-  divider?: boolean
-  default?: boolean
+  title: string;
+  icon?: any;
+  isActive: NonNullable<ButtonViewReturnComponentProps['isActive']>;
+  action?: ButtonViewReturnComponentProps['action'];
+  style?: React.CSSProperties;
+  shortcutKeys?: string[];
+  disabled?: boolean;
+  divider?: boolean;
+  default?: boolean;
 }
 interface IPropsTextDirectionButton {
-  editor: any
-  disabled?: boolean
-  color?: string
-  maxHeight?: string | number
-  icon?: any
-  tooltip?: string
-  items?: Item[]
+  editor: any;
+  disabled?: boolean;
+  color?: string;
+  maxHeight?: string | number;
+  icon?: any;
+  tooltip?: string;
+  items?: Item[];
 }
 
 function TextDirectionButton(props: IPropsTextDirectionButton) {
@@ -50,49 +58,48 @@ function TextDirectionButton(props: IPropsTextDirectionButton) {
 
   return (
     <Popover modal>
-      <PopoverTrigger asChild
-        disabled={props?.disabled}
-      >
+      <PopoverTrigger asChild disabled={props?.disabled}>
         <ActionButton
-          customClass="!richtext-w-12 richtext-h-12"
+          customClass='!w-12 h-12'
           disabled={props?.disabled}
           icon={props?.icon}
           tooltip={props?.tooltip}
         >
-          <IconComponent className="richtext-ml-1 richtext-size-3 richtext-text-zinc-500"
-            name="MenuDown"
+          <IconComponent
+            className='ml-1 size-3 text-zinc-500'
+            name='MenuDown'
           />
         </ActionButton>
       </PopoverTrigger>
 
       <PopoverContent
-        align="start"
-        className="richtext-flex richtext-w-full richtext-min-w-4 richtext-flex-row richtext-gap-1 !richtext-p-[4px]"
-        side="bottom"
+        align='start'
+        className='flex w-full min-w-4 flex-row gap-1 !p-[4px]'
+        side='bottom'
       >
         {props?.items?.map((item, index) => {
           return (
             <Tooltip key={`text-align-${index}`}>
               <TooltipTrigger asChild>
                 <Toggle
-                  className="richtext-size-7 richtext-p-1"
+                  className='size-7 p-1'
                   data-state={active.title === item.title ? 'on' : 'off'}
                   onClick={item?.action}
                   pressed={active.title === item.title}
-                  size="sm"
+                  size='sm'
                 >
                   {item?.icon && <IconComponent name={item.icon} />}
                 </Toggle>
               </TooltipTrigger>
 
-              <TooltipContent className="richtext-flex richtext-flex-col richtext-items-center">
-                <span>
-                  {item.title}
-                </span>
+              <TooltipContent className='flex flex-col items-center'>
+                <span>{item.title}</span>
 
                 {!!item.shortcutKeys?.length && (
                   <span>
-                    {item.shortcutKeys?.map(item => getShortcutKey(item)).join(' ')}
+                    {item.shortcutKeys
+                      ?.map(item => getShortcutKey(item))
+                      .join(' ')}
                   </span>
                 )}
               </TooltipContent>

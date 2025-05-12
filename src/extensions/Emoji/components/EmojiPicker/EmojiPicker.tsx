@@ -1,30 +1,41 @@
+"use client"
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type React from 'react';
 import { useCallback } from 'react';
 
-import { ActionButton, Popover, PopoverContent, PopoverTrigger } from '@/components';
-import { EmojiPicker, EmojiPickerContent, EmojiPickerFooter, EmojiPickerSearch } from '@/components/ui/emoji-picker';
+import {
+  ActionButton,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components';
+import {
+  EmojiPicker,
+  EmojiPickerContent,
+  EmojiPickerFooter,
+  EmojiPickerSearch,
+} from '@/components';
 
 interface IProps {
-  showClear?: boolean
-  onSelectEmoji: (arg: string) => void
-  children: React.ReactNode
+  showClear?: boolean;
+  onSelectEmoji: (arg: string) => void;
+  children: React.ReactNode;
 }
 
 function EmojiPickerWrap({ onSelectEmoji, children }: IProps) {
-
   return (
     <Popover modal>
-      <PopoverTrigger asChild>
-        {children}
-      </PopoverTrigger>
+      <PopoverTrigger asChild>{children}</PopoverTrigger>
 
-      <PopoverContent align="start"
-        className="richtext-size-full richtext-p-2"
+      <PopoverContent
+        align='start'
+        className='size-full p-2'
         hideWhenDetached
-        side="bottom"
+        side='bottom'
       >
         <EmojiPicker
-          className="!richtext-h-[342px]"
+          className='!h-[342px]'
           onEmojiSelect={({ emoji }) => {
             onSelectEmoji(emoji);
           }}
@@ -45,15 +56,12 @@ export function EmojiPickerComponent({ editor, icon, ...props }: any) {
       const { $anchor } = selection;
       return editor.chain().insertContentAt($anchor.pos, emoji).run();
     },
-    [editor],
+    [editor]
   );
 
   return (
     <EmojiPickerWrap onSelectEmoji={setEmoji}>
-      <ActionButton
-        icon={icon}
-        tooltip={props?.tooltip}
-      />
+      <ActionButton icon={icon} tooltip={props?.tooltip} />
     </EmojiPickerWrap>
   );
 }

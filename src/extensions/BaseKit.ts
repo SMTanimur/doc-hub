@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { AnyExtension } from '@tiptap/core';
 import { Extension } from '@tiptap/core';
@@ -126,17 +127,7 @@ export interface BaseKitOptions {
    */
   // iframe: Partial<IframeOptions> | false;
 
-  /**
-   * Trailing node options or false, indicating whether to enable the trailing node
-   *
-   * @default true
-   */
-  trailingNode: Partial<TrailingNodeOptions> | false
-  /**
-   * textBubble options or false, indicating whether to enable the textBubble
-   *
-   * @default true
-   */
+
   textBubble: Partial<TextBubbleOptions> | false
   /**
    * selection options or false, indicating whether to enable the selection
@@ -172,12 +163,12 @@ export const BaseKit = /* @__PURE__ */ Extension.create<BaseKitOptions>({
               return '';
             }
             if (editor.extensionManager.extensions.some(ext => ext.name === 'slashCommand')) {
-              return localeActions.t('editor.slash');
+              return "Slash";
             }
             if (pos === 0) {
-              return localeActions.t('editor.content');
+              return "Content";
             }
-            return localeActions.t('editor.content');
+            return "Content";
           },
           ...this.options.placeholder,
         }),
@@ -234,9 +225,7 @@ export const BaseKit = /* @__PURE__ */ Extension.create<BaseKitOptions>({
       extensions.push(TextStyle.configure(this.options.textStyle));
     }
 
-    if (this.options.trailingNode !== false) {
-      extensions.push(TrailingNode.configure(this.options.trailingNode));
-    }
+ 
 
     if (this.options.selection !== false) {
       extensions.push(Selection);

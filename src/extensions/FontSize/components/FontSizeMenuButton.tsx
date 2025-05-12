@@ -12,35 +12,33 @@ import {
 import type { ButtonViewReturnComponentProps } from '@/types';
 
 export interface Item {
-  title: string
-  isActive: NonNullable<ButtonViewReturnComponentProps['isActive']>
-  action?: ButtonViewReturnComponentProps['action']
-  style?: React.CSSProperties
-  disabled?: boolean
-  divider?: boolean
-  default?: boolean
+  title: string;
+  isActive: NonNullable<ButtonViewReturnComponentProps['isActive']>;
+  action?: ButtonViewReturnComponentProps['action'];
+  style?: React.CSSProperties;
+  disabled?: boolean;
+  divider?: boolean;
+  default?: boolean;
 }
 
 interface IPropsFontSizeMenuButton {
-  editor: any
-  disabled?: boolean
-  color?: string
-  shortcutKeys?: string[]
-  maxHeight?: string | number
-  tooltip?: string
-  items?: Item[]
+  editor: any;
+  disabled?: boolean;
+  color?: string;
+  shortcutKeys?: string[];
+  maxHeight?: string | number;
+  tooltip?: string;
+  items?: Item[];
 }
 
 function FontSizeMenuButton(props: IPropsFontSizeMenuButton) {
-
-
   const active = useMemo(() => {
     const find: any = (props.items || []).find((k: any) => k.isActive());
     if (find) {
       return find;
     }
     const item: Item = {
-      title: "Default",
+      title: 'Default',
       isActive: () => false,
     };
     return item;
@@ -48,18 +46,16 @@ function FontSizeMenuButton(props: IPropsFontSizeMenuButton) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild
-        disabled={props?.disabled}
-      >
+      <DropdownMenuTrigger asChild disabled={props?.disabled}>
         <ActionMenuButton
           disabled={props?.disabled}
-          icon="MenuDown"
+          icon='MenuDown'
           title={active?.title}
           tooltip={`${props?.tooltip}`}
         />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="richtext-max-h-96 richtext-w-32 richtext-overflow-y-auto">
+      <DropdownMenuContent className='max-h-96 w-32 overflow-y-auto'>
         {props?.items?.map((item: any, index) => {
           return (
             <DropdownMenuCheckboxItem
@@ -67,9 +63,7 @@ function FontSizeMenuButton(props: IPropsFontSizeMenuButton) {
               key={`font-size-${index}`}
               onClick={item.action}
             >
-              <div className="richtext-ml-1 richtext-h-full">
-                {item.title}
-              </div>
+              <div className='ml-1 h-full'>{item.title}</div>
             </DropdownMenuCheckboxItem>
           );
         })}

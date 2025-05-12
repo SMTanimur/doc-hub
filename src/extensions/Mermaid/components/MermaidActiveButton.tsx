@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-"use client"
+'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -127,17 +127,17 @@ export const MermaidActiveButton: React.FC<IProps> = ({ editor, upload }) => {
         />
       </DialogTrigger>
 
-      <DialogContent className='richtext-z-[99999] !richtext-max-w-[1300px]'>
+      <DialogContent className='z-[99999] !max-w-[1300px]'>
         <DialogTitle>Mermaid</DialogTitle>
 
         <div
           ref={loadMermaid}
           style={{ height: '100%', border: '1px solid hsl(var(--border))' }}
         >
-          <div className='richtext-flex richtext-gap-[10px] richtext-rounded-[10px] richtext-p-[10px]'>
+          <div className='flex gap-[10px] rounded-[10px] p-[10px]'>
             <Textarea
               autoFocus
-              className='richtext-flex-1'
+              className='flex-1'
               defaultValue={defaultCode}
               onChange={e => setMermaidCode(e.target.value)}
               placeholder='Text'
@@ -145,12 +145,12 @@ export const MermaidActiveButton: React.FC<IProps> = ({ editor, upload }) => {
               rows={10}
               value={mermaidCode}
               style={{
-                color: 'hsl(var(--richtext-foreground))',
+                color: 'hsl(var(--foreground))',
               }}
             />
 
             <div
-              className='richtext-flex richtext-flex-1 richtext-items-center richtext-justify-center richtext-rounded-[10px] richtext-p-[10px]'
+              className='flex flex-1 items-center justify-center rounded-[10px] p-[10px]'
               dangerouslySetInnerHTML={{ __html: svgCode }}
               ref={mermaidRef as any}
               style={{

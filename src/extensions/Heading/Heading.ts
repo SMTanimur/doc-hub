@@ -15,7 +15,7 @@ export const Heading = /* @__PURE__ */ TiptapHeading.extend<HeadingOptions>({
     return {
       ...this.parent?.(),
       levels: [1, 2, 3, 4, 5, 6],
-      button({ editor, extension, t }) {
+      button({ editor, extension }) {
         const { extensions = [] } = editor.extensionManager ?? [];
         const levels = extension.options?.levels || [];
         const baseKitExt = extensions.find(
@@ -26,7 +26,7 @@ export const Heading = /* @__PURE__ */ TiptapHeading.extend<HeadingOptions>({
           action: () => editor.commands.toggleHeading({ level }),
           isActive: () => editor.isActive('heading', { level }) || false,
           disabled: !editor.can().toggleHeading({ level }),
-          title: t(`editor.heading.h${level}.tooltip`),
+          title: `Heading ${level}`,
           level,
           shortcutKeys: ['alt', 'mod', `${level}`],
         }));
@@ -37,7 +37,7 @@ export const Heading = /* @__PURE__ */ TiptapHeading.extend<HeadingOptions>({
             isActive: () => editor.isActive('paragraph') || false,
             disabled: !editor.can().setParagraph(),
             level: 0,
-            title: t('editor.paragraph.tooltip'),
+            title: 'Paragraph',
             shortcutKeys: ['alt', 'mod', '0'],
           });
         }
@@ -47,7 +47,7 @@ export const Heading = /* @__PURE__ */ TiptapHeading.extend<HeadingOptions>({
         return {
           component: HeadingButton,
           componentProps: {
-            tooltip: t('editor.heading.tooltip'),
+            tooltip: 'Heading',
             disabled,
             items,
             editor,

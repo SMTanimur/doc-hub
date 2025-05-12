@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-"use client"
+'use client';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -208,7 +208,7 @@ export const DrawerActiveButton: React.FC<IProps> = ({ editor, upload }) => {
         />
       </DialogTrigger>
 
-      <DialogContent className='richtext-z-[99999] !richtext-max-w-[1300px]'>
+      <DialogContent className='z-[99999] !max-w-[1300px]'>
         <DialogTitle>Drawer</DialogTitle>
 
         <div
@@ -220,7 +220,7 @@ export const DrawerActiveButton: React.FC<IProps> = ({ editor, upload }) => {
             position: 'relative',
           }}
         >
-          <div className='richtext-size-full' id='easydrawer'></div>
+          <div className='size-full' id='easydrawer'></div>
 
           <ControlDrawer
             changeBorderColorShape={changeBorderColorShape}

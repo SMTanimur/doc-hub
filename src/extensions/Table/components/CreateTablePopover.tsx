@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
@@ -11,20 +11,21 @@ import {
 } from '@/constants';
 import { isMobile } from '@/utils/is-mobile';
 
-const createArray = (length: number) => Array.from({ length }).map((_, index) => index + 1);
+const createArray = (length: number) =>
+  Array.from({ length }).map((_, index) => index + 1);
 
 interface IPropsCreateTablePopover {
-  createTable: any
-  children: any
+  createTable: any;
+  children: any;
 }
 
 export interface GridSize {
-  rows: number
-  cols: number
+  rows: number;
+  cols: number;
 }
 
 export interface CreateTablePayload extends GridSize {
-  withHeaderRow: boolean
+  withHeaderRow: boolean;
 }
 
 function CreateTablePopover(props: IPropsCreateTablePopover) {
@@ -41,7 +42,7 @@ function CreateTablePopover(props: IPropsCreateTablePopover) {
 
   function selectTableGridSize(rows: number, cols: number): void {
     if (rows === tableGridSize.rows) {
-      setTableGridSize((prev) => {
+      setTableGridSize(prev => {
         return {
           ...prev,
           rows: Math.min(rows + 1, TABLE_MAX_GRID_SIZE),
@@ -50,7 +51,7 @@ function CreateTablePopover(props: IPropsCreateTablePopover) {
     }
 
     if (cols === tableGridSize.cols) {
-      setTableGridSize((prev) => {
+      setTableGridSize(prev => {
         return {
           ...prev,
           cols: Math.min(cols + 1, TABLE_MAX_GRID_SIZE),
@@ -85,34 +86,27 @@ function CreateTablePopover(props: IPropsCreateTablePopover) {
 
   return (
     <Popover modal>
-      <PopoverTrigger asChild>
-        {props?.children}
-      </PopoverTrigger>
+      <PopoverTrigger asChild>{props?.children}</PopoverTrigger>
 
-      <PopoverContent align="start"
-        className="richtext-w-full !richtext-p-2"
-        side="bottom"
-      >
-        <div className="table-grid-size-editor richtext-p-0">
-          <div className="richtext-flex richtext-flex-col richtext-flex-wrap richtext-justify-between richtext-gap-1">
+      <PopoverContent align='start' className='w-full !p-2' side='bottom'>
+        <div className='table-grid-size-editor p-0'>
+          <div className='flex flex-col flex-wrap justify-between gap-1'>
             {createArray(tableGridSize?.rows)?.map((row: any) => {
               return (
-                <div className="richtext-flex richtext-gap-1"
-                  key={`r-${row}`}
-                >
+                <div className='flex gap-1' key={`r-${row}`}>
                   {createArray(tableGridSize?.cols)?.map((col: any) => {
                     return (
                       <div
                         key={`c-${col}`}
                         onMouseDown={() => onMouseDown(row, col)}
                         onMouseOver={() => selectTableGridSize(row, col)}
-                        className={`richtext-cursor-pointer richtext-border-border ${
-                          col <= selectedTableGridSize.cols
-                          && row <= selectedTableGridSize.rows
-                          && 'tableCellActive !richtext-bg-foreground'
+                        className={`cursor-pointer border-border ${
+                          col <= selectedTableGridSize.cols &&
+                          row <= selectedTableGridSize.rows &&
+                          'tableCellActive !bg-foreground'
                         }`}
                       >
-                        <div className="richtext-box-border richtext-size-4 richtext-rounded-[2px] !richtext-border richtext-border-solid !richtext-border-border richtext-p-1"></div>
+                        <div className='box-border size-4 rounded-[2px] !border border-solid !border-border p-1'></div>
                       </div>
                     );
                   })}
@@ -121,11 +115,8 @@ function CreateTablePopover(props: IPropsCreateTablePopover) {
             })}
           </div>
 
-          <div className="richtext-mt-2 richtext-text-center richtext-text-sm richtext-text-zinc-600">
-            {selectedTableGridSize.rows}
-            {' '}
-            x
-            {selectedTableGridSize.cols}
+          <div className='mt-2 text-center text-sm text-zinc-600'>
+            {selectedTableGridSize.rows} x{selectedTableGridSize.cols}
           </div>
         </div>
       </PopoverContent>

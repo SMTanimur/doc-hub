@@ -39,7 +39,7 @@ export const Drawer = /* @__PURE__ */ TiptapImage.extend<DrawerOptions>({
       HTMLAttributes: {
         class: 'drawer',
       },
-      button: ({ editor, t, extension }: any) => ({
+      button: ({ editor, extension }: any) => ({
         component: DrawerActiveButton,
         componentProps: {
           action: () => {
@@ -49,7 +49,7 @@ export const Drawer = /* @__PURE__ */ TiptapImage.extend<DrawerOptions>({
           disabled: false,
           editor,
           icon: 'PencilRuler',
-          tooltip: t('editor.drawer.tooltip'),
+          tooltip: 'Insert Image',
           upload: extension?.options?.upload,
         },
       }),

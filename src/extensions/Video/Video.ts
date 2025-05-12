@@ -52,7 +52,7 @@ interface SetVideoOptions {
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+    // @ts-ignore
     video: {
       /**
        * Add an video
@@ -110,7 +110,7 @@ export const Video = /* @__PURE__ */ Node.create<VideoOptions>({
         class: 'iframe-wrapper',
         style: 'display: flex;justify-content: center;',
       },
-      button: ({ editor, t }: any) => {
+      button: ({ editor }: any) => {
         return {
           component: ActionVideoButton,
           componentProps: {
@@ -121,7 +121,7 @@ export const Video = /* @__PURE__ */ Node.create<VideoOptions>({
             /* If setVideo is not available(when Video Component is not imported), the button is disabled */
             disabled: !editor.can().setVideo?.({}),
             icon: 'Video',
-            tooltip: t('editor.video.tooltip'),
+            tooltip: 'Video',
             editor,
           },
         };

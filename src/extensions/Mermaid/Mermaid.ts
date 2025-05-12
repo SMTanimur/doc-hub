@@ -39,7 +39,7 @@ export const Mermaid = /* @__PURE__ */ TiptapImage.extend<MermaidOptions>({
       HTMLAttributes: {
         class: 'mermaid',
       },
-      button: ({ editor, t, extension }: any) => ({
+      button: ({ editor, extension }: any) => ({
         component: MermaidActiveButton,
         componentProps: {
           action: () => {
@@ -49,7 +49,7 @@ export const Mermaid = /* @__PURE__ */ TiptapImage.extend<MermaidOptions>({
           disabled: false,
           editor,
           icon: 'Mermaid',
-          tooltip: t('editor.mermaid.tooltip'),
+          tooltip: 'Mermaid',
           upload: extension?.options?.upload,
         },
       }),

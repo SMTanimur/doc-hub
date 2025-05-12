@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+'use client';
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useRef, useState } from 'react';
@@ -206,7 +206,7 @@ export function EditDrawerBlock({ editor, attrs, extension }: any) {
         />
       </DialogTrigger>
 
-      <DialogContent className='richtext-z-[99999] !richtext-max-w-[1300px]'>
+      <DialogContent className='z-[99999] !max-w-[1300px]'>
         <DialogTitle>Edit Drawer</DialogTitle>
 
         <div
@@ -217,7 +217,7 @@ export function EditDrawerBlock({ editor, attrs, extension }: any) {
             position: 'relative',
           }}
         >
-          <div className='richtext-size-full' id='easydrawer'></div>
+          <div className='size-full' id='easydrawer'></div>
 
           <ControlDrawer
             changeBorderColorShape={changeBorderColorShape}

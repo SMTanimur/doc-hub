@@ -5,43 +5,40 @@ import { truncate } from 'lodash-es';
 
 import { ActionButton, Separator } from '@/components';
 
-
 interface IPropsLinkViewBlock {
-  editor: any
-  link: string
-  onClear?: any
-  onEdit?: any
+  editor: any;
+  link: string;
+  onClear?: any;
+  onEdit?: any;
 }
 
 function LinkViewBlock(props: IPropsLinkViewBlock) {
-  
-
   return (
-    <div className="richtext-flex richtext-items-center richtext-gap-2 richtext-p-2 richtext-bg-white !richtext-border richtext-rounded-lg richtext-shadow-sm dark:richtext-bg-black richtext-border-neutral-200 dark:richtext-border-neutral-800">
+    <div className='flex items-center gap-2 p-2 bg-white !border rounded-lg shadow-sm dark:bg-black border-neutral-200 dark:border-neutral-800'>
       <a
         href={props?.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="richtext-text-sm richtext-underline richtext-break-all"
+        target='_blank'
+        rel='noopener noreferrer'
+        className='text-sm underline break-all'
       >
         {truncate(props?.link, {
           length: 50,
           omission: '…',
         })}
       </a>
-      {props?.link && <Separator orientation="vertical" className="!richtext-h-4" />}
-      <div className="richtext-flex richtext-flex-nowrap">
+      {props?.link && <Separator orientation='vertical' className='!h-4' />}
+      <div className='flex flex-nowrap'>
         <ActionButton
-          icon="Pencil"
-          tooltip="Edit"
+          icon='Pencil'
+          tooltip='Edit'
           action={() => {
             props?.onEdit();
           }}
           tooltipOptions={{ sideOffset: 15 }}
         />
         <ActionButton
-          icon="Unlink"
-          tooltip="Unlink"
+          icon='Unlink'
+          tooltip='Unlink'
           action={() => {
             props?.onClear();
           }}

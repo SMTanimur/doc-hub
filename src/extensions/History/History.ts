@@ -15,7 +15,7 @@ export const History = /* @__PURE__ */ TiptapHistory.extend<HistoryOptions>({
       ...this.parent?.(),
       depth: 100,
       newGroupDelay: 500,
-      button: ({ editor, t }: any) => {
+      button: ({ editor }: any) => {
         return historys.map(item => ({
           component: HistoryActionButton,
           componentProps: {
@@ -31,7 +31,7 @@ export const History = /* @__PURE__ */ TiptapHistory.extend<HistoryOptions>({
             disabled: item === 'undo' ? !editor.can().undo() : !editor.can().redo(),
             isActive: () => (item === 'undo' ? !editor.can().undo() : !editor.can().redo()),
             icon: item === 'undo' ? 'Undo2' : 'Redo2',
-            tooltip: t(`editor.${item}.tooltip`),
+            tooltip: item === 'undo' ? 'Undo' : 'Redo',
           },
         }));
       },

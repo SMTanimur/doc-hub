@@ -1,4 +1,4 @@
-import { useStoreUploadImage } from '@/store/store';
+import { useStoreUploadImage } from '@/stores';
 import { dispatchEvent } from '@/utils/customEvents/customEvents';
 import { EVENTS } from '@/utils/customEvents/events.constant';
 

@@ -1,10 +1,25 @@
-"use client"
+'use client';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { ActionButton, Button, Checkbox, Input, Label, Tabs, TabsContent, TabsList, TabsTrigger } from '@/components';
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+  ActionButton,
+  Button,
+  Checkbox,
+  Input,
+  Label,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { ImageCropper } from '@/extensions/Image/components/ImageCropper';
 import Image from '@/extensions/Image/Image';
 import { actionDialogImage } from '@/extensions/Image/store';
@@ -13,7 +28,6 @@ import { listenEvent } from '@/utils/customEvents/customEvents';
 import { EVENTS } from '@/utils/customEvents/events.constant';
 
 function ActionImageButton(props: any) {
-
   const [open, setOpen] = useState(false);
 
   const handleUploadImage = (evt: any) => {
@@ -23,20 +37,25 @@ function ActionImageButton(props: any) {
   const [link, setLink] = useState<string>('');
   const fileInput = useRef<HTMLInputElement>(null);
 
-  const [imageInline, setImageInline] = useState(props.editor.extensionManager.extensions.find(
-    (extension: any) => extension.name === Image.name,
-  )?.options.defaultInline || false);
+  const [imageInline, setImageInline] = useState(
+    props.editor.extensionManager.extensions.find(
+      (extension: any) => extension.name === Image.name
+    )?.options.defaultInline || false
+  );
 
   const uploadOptions = useMemo(() => {
     const uploadOptions = props.editor.extensionManager.extensions.find(
-      (extension: any) => extension.name === Image.name,
+      (extension: any) => extension.name === Image.name
     )?.options;
 
     return uploadOptions;
   }, [props.editor]);
 
   useEffect(() => {
-    const rm1 = listenEvent(EVENTS.UPLOAD_IMAGE(props.editor.id), handleUploadImage);
+    const rm1 = listenEvent(
+      EVENTS.UPLOAD_IMAGE(props.editor.id),
+      handleUploadImage
+    );
 
     return () => {
       rm1();
@@ -58,7 +77,11 @@ function ActionImageButton(props: any) {
       src = URL.createObjectURL(file);
     }
 
-    props.editor.chain().focus().setImageInline({ src, inline: imageInline }).run();
+    props.editor
+      .chain()
+      .focus()
+      .setImageInline({ src, inline: imageInline })
+      .run();
     setOpen(false);
     setImageInline(false);
   }
@@ -66,7 +89,11 @@ function ActionImageButton(props: any) {
     e.preventDefault();
     e.stopPropagation();
 
-    props.editor.chain().focus().setImageInline({ src: link, inline: imageInline }).run();
+    props.editor
+      .chain()
+      .focus()
+      .setImageInline({ src: link, inline: imageInline })
+      .run();
     setOpen(false);
     setImageInline(false);
     setLink('');
@@ -78,10 +105,7 @@ function ActionImageButton(props: any) {
   }
 
   return (
-    <Dialog
-      onOpenChange={setOpen}
-      open={open}
-    >
+    <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>
         <ActionButton
           action={() => setOpen(true)}
@@ -91,92 +115,84 @@ function ActionImageButton(props: any) {
       </DialogTrigger>
 
       <DialogContent>
-        <DialogTitle>
-          Image
-        </DialogTitle>
+        <DialogTitle>Image</DialogTitle>
 
         <Tabs
-          activationMode="manual"
+          activationMode='manual'
           defaultValue={
-            uploadOptions.resourceImage === 'both' || uploadOptions.resourceImage === 'upload'
+            uploadOptions.resourceImage === 'both' ||
+            uploadOptions.resourceImage === 'upload'
               ? 'upload'
               : 'link'
           }
         >
-          <TabsList className="richtext-grid richtext-w-full richtext-grid-cols-2">
-            {uploadOptions.resourceImage === 'both' || uploadOptions.resourceImage === 'upload'
-              ? (
-                <TabsTrigger value="upload">
-                  Upload
-                </TabsTrigger>
-              )
-              : <></>}
+          <TabsList className='grid w-full grid-cols-2'>
+            {uploadOptions.resourceImage === 'both' ||
+            uploadOptions.resourceImage === 'upload' ? (
+              <TabsTrigger value='upload'>Upload</TabsTrigger>
+            ) : (
+              <></>
+            )}
 
-            {uploadOptions.resourceImage === 'both' || uploadOptions.resourceImage === 'link'
-              ? (
-                <TabsTrigger value="link">
-                  URL
-                </TabsTrigger>
-              )
-              : <></>}
+            {uploadOptions.resourceImage === 'both' ||
+            uploadOptions.resourceImage === 'link' ? (
+              <TabsTrigger value='link'>URL</TabsTrigger>
+            ) : (
+              <></>
+            )}
           </TabsList>
 
-          <div className="richtext-my-[10px] richtext-flex richtext-items-center richtext-gap-[4px]">
+          <div className='my-[10px] flex items-center gap-[4px]'>
             <Checkbox
               checked={imageInline}
-              onCheckedChange={(v) => {
+              onCheckedChange={v => {
                 setImageInline(v as boolean);
               }}
             />
 
-            <Label>
-              Inline
-            </Label>
+            <Label>Inline</Label>
           </div>
 
-          <TabsContent value="upload">
-            <div className="richtext-flex richtext-items-center richtext-gap-[10px]">
-              <Button className="richtext-mt-1 richtext-w-full"
-                onClick={handleClick}
-                size="sm"
-              >
+          <TabsContent value='upload'>
+            <div className='flex items-center gap-[10px]'>
+              <Button className='mt-1 w-full' onClick={handleClick} size='sm'>
                 Upload
               </Button>
 
               <ImageCropper
                 editor={props.editor}
                 imageInline={imageInline}
-                onClose={() => actionDialogImage.setOpen(props.editor.id, false)}
+                onClose={() =>
+                  actionDialogImage.setOpen(props.editor.id, false)
+                }
               />
             </div>
 
             <input
-              accept="image/*"
+              accept='image/*'
               multiple
               onChange={handleFile}
               ref={fileInput}
-              type="file"
+              type='file'
               style={{
                 display: 'none',
               }}
             />
           </TabsContent>
 
-          <TabsContent value="link">
+          <TabsContent value='link'>
             <form onSubmit={handleLink}>
-              <div className="richtext-flex richtext-items-center richtext-gap-2">
+              <div className='flex items-center gap-2'>
                 <Input
                   autoFocus
                   onChange={e => setLink(e.target.value)}
-                  placeholder="Image URL"
+                  placeholder='Image URL'
                   required
-                  type="url"
+                  type='url'
                   value={link}
                 />
 
-                <Button type="submit">
-                  Apply
-                </Button>
+                <Button type='submit'>Apply</Button>
               </div>
             </form>
           </TabsContent>

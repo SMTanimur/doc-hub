@@ -1,26 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-"use client"
+'use client';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
 import clsx from 'clsx';
 import scrollIntoView from 'scroll-into-view-if-needed';
 
-
-
 interface IProps {
-  items: Array<{ name: string, emoji: string, fallbackImage?: string }>
-  command: any
+  items: Array<{ name: string; emoji: string; fallbackImage?: string }>;
+  command: any;
 }
 
 export const EmojiList: React.FC<IProps> = forwardRef((props, ref) => {
   const $container: any = useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
-
 
   const selectItem = (index: any) => {
     const item = props.items[index];
@@ -31,7 +34,9 @@ export const EmojiList: React.FC<IProps> = forwardRef((props, ref) => {
   };
 
   const upHandler = () => {
-    setSelectedIndex((selectedIndex + props.items.length - 1) % props.items.length);
+    setSelectedIndex(
+      (selectedIndex + props.items.length - 1) % props.items.length
+    );
   };
 
   const downHandler = () => {
@@ -45,9 +50,10 @@ export const EmojiList: React.FC<IProps> = forwardRef((props, ref) => {
   useEffect(() => setSelectedIndex(0), [props.items]);
 
   useEffect(() => {
-    if (Number.isNaN(selectedIndex + 1))
-      return;
-    const el = $container.current.querySelector(`span:nth-of-type(${selectedIndex + 1})`);
+    if (Number.isNaN(selectedIndex + 1)) return;
+    const el = $container.current.querySelector(
+      `span:nth-of-type(${selectedIndex + 1})`
+    );
     el && scrollIntoView(el, { behavior: 'smooth', scrollMode: 'if-needed' });
   }, [selectedIndex]);
 
@@ -73,33 +79,31 @@ export const EmojiList: React.FC<IProps> = forwardRef((props, ref) => {
   }));
 
   return (
-    <div className="richtext-max-h-[320px] richtext-w-[200px] richtext-overflow-y-auto richtext-overflow-x-hidden richtext-rounded-sm !richtext-border richtext-bg-popover richtext-p-1 richtext-text-popover-foreground richtext-shadow-md richtext-outline-none">
+    <div className='max-h-[320px] w-[200px] overflow-y-auto overflow-x-hidden rounded-sm !border bg-popover p-1 text-popover-foreground shadow-md outline-none'>
       <div ref={$container}>
-        {props.items.length > 0
-          ? (
-            props.items.map((item, index) => (
-              <span
-                className={clsx(' richtext-relative richtext-flex  richtext-cursor-default richtext-select-none richtext-items-center richtext-rounded-sm richtext-px-2 richtext-py-1.5 richtext-text-sm richtext-outline-none richtext-transition-colors hover:richtext-bg-accent focus:richtext-bg-accent  focus:richtext-text-accent-foreground', index === selectedIndex ? 'bg-accent' : '')}
-                key={`emoji-list-code-${index}`}
-                onClick={() => selectItem(index)}
-              >
-                {item.fallbackImage ? <img className="richtext-size-[1em]"
-                  src={item.fallbackImage}
-                /> : item.emoji}
-                :
-
-                {item.name}
-                :
-              </span>
-            ))
-          )
-          : (
-            <div className="richtext-relative richtext-flex  richtext-cursor-default richtext-select-none richtext-items-center richtext-rounded-sm richtext-px-2 richtext-py-1.5 richtext-text-sm richtext-outline-none richtext-transition-colors">
-              <span>
-                {"No Result Found"}
-              </span>
-            </div>
-          )}
+        {props.items.length > 0 ? (
+          props.items.map((item, index) => (
+            <span
+              className={clsx(
+                ' relative flex  cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent focus:bg-accent  focus:text-accent-foreground',
+                index === selectedIndex ? 'bg-accent' : ''
+              )}
+              key={`emoji-list-code-${index}`}
+              onClick={() => selectItem(index)}
+            >
+              {item.fallbackImage ? (
+                <img className='size-[1em]' src={item.fallbackImage} />
+              ) : (
+                item.emoji
+              )}
+              :{item.name}:
+            </span>
+          ))
+        ) : (
+          <div className='relative flex  cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors'>
+            <span>{'No Result Found'}</span>
+          </div>
+        )}
       </div>
     </div>
   );

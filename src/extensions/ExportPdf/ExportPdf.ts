@@ -9,14 +9,14 @@ export const ExportPdf = /* @__PURE__ */ Extension.create<any>({
   addOptions() {
     return {
       ...this.parent?.(),
-      button: ({ editor, t }: any) => ({
+      button: ({ editor}: any) => ({
         component: ActionButton,
         componentProps: {
           action: () => {
             printEditorContent(editor);
           },
           icon: 'ExportPdf',
-          tooltip: t('editor.exportPdf.tooltip'),
+          tooltip: 'Export PDF',
           isActive: () => false,
           disabled: false,
         },

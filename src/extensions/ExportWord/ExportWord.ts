@@ -52,14 +52,14 @@ export const ExportWord = /* @__PURE__ */ Extension.create<ExportWordOptions>({
   addOptions() {
     return {
       ...this.parent?.(),
-      button: ({ editor, t }: any) => ({
+      button: ({ editor }: any) => ({
         component: ActionButton,
         componentProps: {
           icon: 'ExportWord',
           action: () => {
             editor?.commands.exportToWord();
           },
-          tooltip: t('editor.exportWord.tooltip'),
+          tooltip: 'Export Word',
           isActive: () => false,
           disabled: false,
         },
