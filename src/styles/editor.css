@@ -1,0 +1,140 @@
+/* Base editor styles */
+.ProseMirror {
+  @apply min-h-[200px] p-4;
+}
+
+/* Headings */
+.ProseMirror h1 {
+  @apply text-4xl font-bold mb-4;
+}
+
+.ProseMirror h2 {
+  @apply text-3xl font-bold mb-3;
+}
+
+.ProseMirror h3 {
+  @apply text-2xl font-bold mb-2;
+}
+
+/* Paragraphs */
+.ProseMirror p {
+  @apply mb-4 leading-relaxed;
+}
+
+/* Lists */
+.ProseMirror ul {
+  @apply list-disc list-inside mb-4;
+}
+
+.ProseMirror ol {
+  @apply list-decimal list-inside mb-4;
+}
+
+.ProseMirror li {
+  @apply mb-1;
+}
+
+/* Tables */
+.ProseMirror table {
+  @apply w-full border-collapse mb-4;
+}
+
+.ProseMirror th {
+  @apply border border-gray-300 bg-gray-100 px-4 py-2 text-left font-semibold;
+}
+
+.ProseMirror td {
+  @apply border border-gray-300 px-4 py-2;
+}
+
+/* Links */
+.ProseMirror a {
+  @apply text-blue-600 hover:text-blue-800 underline;
+}
+
+/* Images */
+.ProseMirror img {
+  @apply max-w-full h-auto my-4;
+}
+
+/* Blockquotes */
+.ProseMirror blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic my-4;
+}
+
+/* Code blocks */
+.ProseMirror pre {
+  @apply bg-gray-100 p-4 rounded mb-4 overflow-x-auto;
+}
+
+.ProseMirror code {
+  @apply bg-gray-100 px-1 rounded;
+}
+
+/* Text alignment */
+.ProseMirror .text-left {
+  @apply text-left;
+}
+
+.ProseMirror .text-center {
+  @apply text-center;
+}
+
+.ProseMirror .text-right {
+  @apply text-right;
+}
+
+/* Focus styles */
+.ProseMirror .has-focus {
+  @apply outline-none ring-2 ring-blue-500 ring-opacity-50;
+}
+
+/* Placeholder */
+.ProseMirror p.is-editor-empty:first-child::before {
+  @apply text-gray-400;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Custom styles for imported content */
+.ProseMirror .heading-1 {
+  @apply text-4xl font-bold mb-4;
+}
+
+.ProseMirror .heading-2 {
+  @apply text-3xl font-bold mb-3;
+}
+
+.ProseMirror .heading-3 {
+  @apply text-2xl font-bold mb-2;
+}
+
+.ProseMirror .normal {
+  @apply text-base leading-relaxed;
+}
+
+.ProseMirror .list-paragraph {
+  @apply mb-2;
+}
+
+.ProseMirror .quote {
+  @apply border-l-4 border-gray-300 pl-4 italic my-4;
+}
+
+.ProseMirror .table {
+  @apply w-full border-collapse mb-4;
+}
+
+.ProseMirror .table-row {
+  @apply border-b border-gray-300;
+}
+
+.ProseMirror .table-cell {
+  @apply border border-gray-300 px-4 py-2;
+}
+
+.ProseMirror .table-header {
+  @apply bg-gray-100 font-semibold;
+}
