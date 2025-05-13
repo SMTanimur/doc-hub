@@ -34,6 +34,7 @@ import { Table } from '@/extensions/Table';
 import { Iframe } from '@/extensions/Iframe';
 import { ExportPdf } from '@/extensions/ExportPdf';
 import { ExportWord } from '@/extensions/ExportWord';
+import { ImportDocument } from '@/extensions/ImportDocument';
 import { TextDirection } from '@/extensions/TextDirection';
 import { Mention } from '@/extensions/Mention';
 import { Attachment } from '@/extensions/Attachment';
@@ -130,6 +131,7 @@ const extensions = [
   ExportPdf.configure({ spacer: true }),
 
   ExportWord,
+  ImportDocument,
   TextDirection,
   Mention,
   Attachment.configure({

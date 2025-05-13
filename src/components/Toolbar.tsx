@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useMemo } from 'react';
 import type { Editor } from '@tiptap/core';
 import type { ToolbarItemProps, ToolbarProps } from '@/types';

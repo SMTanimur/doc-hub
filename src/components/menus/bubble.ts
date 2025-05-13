@@ -105,6 +105,7 @@ function imageGifSizeMenus(editor: Editor): BubbleMenuItem[] {
     componentProps: {
       tooltip: `editor.${size.replace('-', '.')}.tooltip`,
       icon: icons[i],
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       action: () => editor.commands.updateImageGif({ width: IMAGE_SIZE[size] }),
       isActive: () => editor.isActive('image', { width: IMAGE_SIZE[size] }),

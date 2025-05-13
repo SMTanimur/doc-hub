@@ -74,10 +74,11 @@ import {
   Undo2,
   Unlink,
   Video,
+  FileArchive,
   ZoomIn,
   ZoomOut,
   PencilRuler,
-  WrapText
+  WrapText,
 } from 'lucide-react';
 
 import {
@@ -189,6 +190,7 @@ export const icons = {
   ExportPdf,
   ExportWord,
   ImportWord,
+  ImportDocument: FileArchive,
   ColumnAddLeft,
   ColumnAddRight,
   BookMarked,
@@ -211,5 +213,5 @@ export const icons = {
   FlipX: FlipVertical,
   FlipY: FlipHorizontal,
   PencilRuler,
-  WrapText
+  WrapText,
 } as any;
