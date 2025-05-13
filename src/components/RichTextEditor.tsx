@@ -133,10 +133,6 @@ function RichTextEditor(
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', props.dark);
-  }, [props.dark]);
-
-  useEffect(() => {
     editor?.setEditable(!props?.disabled);
     editableEditorActions.setDisable(id, !props?.disabled);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -201,7 +197,7 @@ function RichTextEditor(
     <div className='reactjs-tiptap-editor'>
       <ProviderRichText id={id}>
         <TooltipProvider delayDuration={0} disableHoverableContent>
-          <div className='overflow-hidden rounded-[0.5rem] bg-background shadow outline outline-1'>
+          <div className='overflow-hidden rounded-[0.5rem] bg-background shadow outline '>
             <div className='flex max-h-full w-full flex-col'>
               {!props?.hideToolbar && (
                 <Toolbar
@@ -212,7 +208,7 @@ function RichTextEditor(
               )}
 
               <EditorContent
-                className={`relative ${props?.contentClass || ''}`}
+                className={`relative px-8 py-20 focus:border-none ${props?.contentClass || ''}`}
                 editor={editor}
               />
 

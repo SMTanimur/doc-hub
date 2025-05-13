@@ -1,9 +1,7 @@
 .reactjs-tiptap-editor.reactjs-tiptap-editor {
   .ProseMirror.ProseMirror.ProseMirror {
-    @apply caret-black dark:caret-white outline-0 pr-8 pl-20 py-16 z-0 lg:pl-8 lg:pr-8;
+    @apply caret-black px-8 py-20 dark:caret-white outline-0 pr-8  z-0 lg:pl-8 lg:pr-8;
     min-height: 180px;
-    padding: 32px 80px;
-
     .img-placeholder {
       width: fit-content;
       position: relative;
@@ -18,7 +16,7 @@
         width: 24px;
         height: 24px;
         margin: -12px 0 0 -12px;
-        @apply animate-spin border-current border-t-transparent rounded-full border-[3px] inline-block;
+        @apply animate-spin border-current border-t-transparent rounded-full  inline-block;
       }
     }
 
@@ -108,8 +106,6 @@
     }
 
     .image-view {
-      $root: &;
-
       display: inline-block;
       float: none;
       max-width: 100%;
@@ -180,8 +176,6 @@
       }
     }
 
-
-
     .image-resizer {
       position: absolute;
       top: 0;
@@ -191,7 +185,6 @@
       height: 100%;
       @apply border !important;
       @apply border-border !important;
-
 
       &__handler {
         position: absolute;
@@ -246,7 +239,6 @@
   .ProseMirror[contenteditable='true'].resize-cursor {
     cursor: col-resize;
   }
-
 }
 
 .slash-command-active.slash-command-active {

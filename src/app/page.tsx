@@ -3,7 +3,7 @@
 
 import { useCallback, useState } from 'react';
 
-
+import 'reactjs-tiptap-editor/style.css';
 import { TableOfContents } from '@/extensions/TableOfContent';
 import { Clear } from '@/extensions/Clear';
 import { FontFamily } from '@/extensions/FontFamily';
