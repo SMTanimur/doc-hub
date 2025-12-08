@@ -10,7 +10,7 @@ First, run the development server:
 ```bash
 npm run dev
 yarn dev
-pnpm dev dfhfdhfd
+pnpm dev dfhfdh
 # or
 bun dev
 ```
